@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const PORT = 5001;
+const PORT = 4000;
 
 app.get('/', (req, res) => {
     res.send('Welcome to the Knitting API!');
