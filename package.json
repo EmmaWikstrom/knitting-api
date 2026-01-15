@@ -2,7 +2,7 @@
   "name": "knitting-api",
   "version": "1.0.0",
   "description": "REST API for knitting projects and yarn inventory",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
