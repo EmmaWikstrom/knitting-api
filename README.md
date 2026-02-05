@@ -60,6 +60,12 @@ Start the server with:
 node index.js
 ```
 
+or 
+
+```bash
+node --watch index.js
+```
+
 The API will run on:  
 **http://localhost:4000**
 
@@ -76,6 +82,12 @@ Returns a list of all yarn entries.
 - 200 OK  
 - 500 Internal Server Error  
 
+Example request:
+
+```bash 
+curl http://localhost:4000/api/yarns
+```
+
 ---
 
 ### Get a yarn by ID
@@ -88,6 +100,11 @@ Returns yarn with specified id
 - 400 Bad Request (invalid id format)  
 - 404 Not Found (yarn does not exist)  
 - 500 Internal Server Error  
+
+Example request:
+```bash 
+curl http://localhost:4000/api/yarns/<id>
+```
 
 ---
 
@@ -102,12 +119,14 @@ Example body:
   "name": "Sunday",
   "brand": "Sandnes Garn",
   "weight": "fingering",
+  "fiber": "100% Merino",
+  "colorName": "forest green",
+  "colorCode": "1234",
+  "dyeLot": "L001",
   "skeins": 2,
   "gramsPerSkein": 50,
   "metersPerSkein": 250,
-  "colorName": "forest green",
-  "colorCode": "1234",
-  "dyeLot": "L001"
+  "notes": "Warm and soft"
 }
 ```
 
@@ -122,13 +141,18 @@ Example request:
 curl -X POST http://localhost:4000/api/yarns \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Merino Wool",
-    "brand": "BrandName",
-    "weight": "DK",
-    "fiber": "100% Merino",
-    "colorName": "Blue",
-    "skeins": 2
-  }'
+  "name": "Sunday",
+  "brand": "Sandnes Garn",
+  "weight": "fingering",
+  "fiber": "100% Merino",
+  "colorName": "forest green",
+  "colorCode": "1234",
+  "dyeLot": "L001",
+  "skeins": 2,
+  "gramsPerSkein": 50,
+  "metersPerSkein": 250,
+  "notes": "Warm and soft"
+}'
 ```
 
 ---
@@ -216,12 +240,14 @@ Replace `<id>` with a real yarn ID from your database.
   "name": "Sunday",
   "brand": "Sandnes Garn",
   "weight": "fingering",
+  "fiber": "100% Merino",
+  "colorName": "forest green",
+  "colorCode": "1234",
+  "dyeLot": "L001",
   "skeins": 2,
   "gramsPerSkein": 50,
   "metersPerSkein": 250,
-  "colorName": "forest green",
-  "colorCode": "1234",
-  "dyeLot": "L001"
+  "notes": "Warm and soft"
 }
 ```
 
