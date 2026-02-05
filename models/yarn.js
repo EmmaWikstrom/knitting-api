@@ -5,12 +5,14 @@ const yarnSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      match: /\D/
     },
     brand: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
+      match: /\D/
     },
     weight: {
       type: String
