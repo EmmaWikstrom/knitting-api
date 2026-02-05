@@ -60,6 +60,12 @@ Start the server with:
 node index.js
 ```
 
+or 
+
+```bash
+node --watch index.js
+```
+
 The API will run on:  
 **http://localhost:4000**
 
@@ -76,6 +82,12 @@ Returns a list of all yarn entries.
 - 200 OK  
 - 500 Internal Server Error  
 
+Example request:
+
+```bash 
+curl http://localhost:4000/api/yarns
+```
+
 ---
 
 ### Get a yarn by ID
@@ -88,6 +100,11 @@ Returns yarn with specified id
 - 400 Bad Request (invalid id format)  
 - 404 Not Found (yarn does not exist)  
 - 500 Internal Server Error  
+
+Example request:
+```bash 
+curl http://localhost:4000/api/yarns/<id>
+```
 
 ---
 
