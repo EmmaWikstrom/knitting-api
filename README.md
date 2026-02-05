@@ -40,14 +40,17 @@ Make sure MongoDB is running locally or update the URI for your setup.
 
 ---
 
-## Running MongoDB Locally 
+## Running MongoDB Locally
 
 If MongoDB is installed locally, start it with:
 
 ```bash
 mongod --dbpath ~/mongodb-data
 ```
+
 (Use your own db path if different.)
+
+---
 
 ## Start the Server
 
@@ -57,47 +60,44 @@ Start the server with:
 node index.js
 ```
 
-The API will run on: 
-http://localhost:4000
+The API will run on:  
+**http://localhost:4000**
 
 ---
 
 ## API Endpoints
 
-Get all yarns
+### Get all yarns
 
-GET /api/yarns
+**GET** `/api/yarns`  
 Returns a list of all yarn entries.
 
-Status codes:
-200 OK
-500 Internal Server Error
-
-Get a yarn by ID
-
-GET /api/yarns/:id
-
-Status codes:
-200 OK
-400 Bad Request (invalid id format)
-404 Not Found (yarn does not exist)
-500 Internal Server Error
+**Status codes**
+- 200 OK  
+- 500 Internal Server Error  
 
 ---
 
-## Example Requests
+### Get a yarn by ID
 
-### Get all yarns
-```bash
-curl http://localhost:4000/api/yarns
-```
+**GET** `/api/yarns/:id`
+Returns yarn with specified id
+
+**Status codes**
+- 200 OK  
+- 400 Bad Request (invalid id format)  
+- 404 Not Found (yarn does not exist)  
+- 500 Internal Server Error  
+
+---
 
 ### Create a new yarn
 
-POST /api/yarns
+**POST** `/api/yarns`
 
 Example body:
 
+```json
 {
   "name": "Sunday",
   "brand": "Sandnes Garn",
@@ -109,66 +109,157 @@ Example body:
   "colorCode": "1234",
   "dyeLot": "L001"
 }
+```
+
+**Status codes**
+- 201 Created  
+- 422 Unprocessable Entity (validation error)  
+- 500 Internal Server Error  
+
+Example request:
 
 ```bash
 curl -X POST http://localhost:4000/api/yarns \
-	-H "Content-Type: application/json" \
-	-d '{
-		"name": "Merino Wool",
-		"brand": "BrandName",
-		"weight": "DK",
-		"fiber": "100% Merino",
-		"colorName": "Blue",
-		"skeins": 2
-	}'
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Merino Wool",
+    "brand": "BrandName",
+    "weight": "DK",
+    "fiber": "100% Merino",
+    "colorName": "Blue",
+    "skeins": 2
+  }'
 ```
-Status codes: 
-201 Created 
-422 Unprocessable Entity (validation error)
-500 Internal Server Error
+
+---
 
 ### Update a yarn
 
-PATCH /api/yarns/:id
+**PATCH** `/api/yarns/:id`
+Update a yarn in stash
 
+Example body:
+
+```json
 {
   "skeins": 4
 }
+```
 
-Status codes:
-200 OK
-400 Bad Request
-404 Not Found
-422 Unprocessable Entity
-500 Internal Server Error
+**Status codes**
+- 200 OK  
+- 400 Bad Request  
+- 404 Not Found  
+- 422 Unprocessable Entity  
+- 500 Internal Server Error  
+
+Example request:
 
 ```bash
 curl -X PATCH http://localhost:4000/api/yarns/<id> \
-	-H "Content-Type: application/json" \
-	-d '{ "skeins": 3 }'
+  -H "Content-Type: application/json" \
+  -d '{ "skeins": 3 }'
 ```
+
+---
 
 ### Delete a yarn
 
-DELETE /api/yarns/:id
+**DELETE** `/api/yarns/:id`
+Deletes one yarn by id
 
-Status codes:
-204 No Content
-400 Bad Request
-404 Not Found
-500 Internal Server Error
+**Status codes**
+- 204 No Content  
+- 400 Bad Request  
+- 404 Not Found  
+- 500 Internal Server Error  
+
+Example request:
 
 ```bash
 curl -X DELETE http://localhost:4000/api/yarns/<id>
 ```
 
-| Method | Endpoint              | Description                |
-|--------|----------------------|----------------------------|
-| GET    | /api/health          | Health check               |
-| GET    | /api/yarns           | List all yarns             |
-| GET    | /api/yarns/:id       | Get a single yarn by ID    |
-| POST   | /api/yarns           | Create a new yarn          |
-| PATCH  | /api/yarns/:id       | Update a yarn by ID        |
-| DELETE | /api/yarns/:id       | Delete a yarn by ID        |
+---
 
+## Testing the API with Yaak
 
+You can test all endpoints using **Yaak**, a graphical API client.
+
+### GET all yarns
+**Method:** GET  
+**URL:**  
+`http://localhost:4000/api/yarns`
+
+Click **Send** to receive a list of all yarns.
+
+---
+
+### GET a yarn by ID
+**Method:** GET  
+**URL:**  
+`http://localhost:4000/api/yarns/<id>`
+
+Replace `<id>` with a real yarn ID from your database.
+
+---
+
+### Create a new yarn
+**Method:** POST  
+**URL:**  
+`http://localhost:4000/api/yarns`
+
+**Body Type:** JSON
+
+```json
+{
+  "name": "Sunday",
+  "brand": "Sandnes Garn",
+  "weight": "fingering",
+  "skeins": 2,
+  "gramsPerSkein": 50,
+  "metersPerSkein": 250,
+  "colorName": "forest green",
+  "colorCode": "1234",
+  "dyeLot": "L001"
+}
+```
+
+---
+
+### Update a yarn
+**Method:** PATCH  
+**URL:**  
+`http://localhost:4000/api/yarns/<id>`
+
+**Body Type:** JSON
+
+```json
+{
+  "skeins": 4
+}
+```
+
+PATCH updates only the fields you include.
+
+---
+
+### Delete a yarn
+**Method:** DELETE  
+**URL:**  
+`http://localhost:4000/api/yarns/<id>`
+
+A successful delete returns **204 No Content**.
+
+---
+
+## Route Overview
+
+| Method | Endpoint        | Description             |
+|--------|-----------------|-------------------------|
+| GET    | /api/health     | Health check            |
+| GET    | /api/yarns      | List all yarns          |
+| GET    | /api/yarns/:id  | Get a yarn by ID        |
+| POST   | /api/yarns      | Create a new yarn       |
+| PATCH  | /api/yarns/:id  | Update a yarn by ID     |
+| DELETE | /api/yarns/:id  | Delete a yarn by ID     |
