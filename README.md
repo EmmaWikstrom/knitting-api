@@ -84,7 +84,7 @@ Returns a list of all yarn entries.
 
 Example request:
 
-```bash 
+```bash
 curl http://localhost:4000/api/yarns
 ```
 
