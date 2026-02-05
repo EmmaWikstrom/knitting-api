@@ -23,6 +23,7 @@ Clone the repository and install dependencies:
 
 ```bash
 npm install
+```
 
 ---
 
@@ -124,8 +125,23 @@ curl -X POST http://localhost:4000/api/yarns \
 Status codes: 
 201 Created 
 422 Unprocessable Entity (validation error)
+500 Internal Server Error
 
 ### Update a yarn
+
+PATCH /api/yarns/:id
+
+{
+  "skeins": 4
+}
+
+Status codes:
+200 OK
+400 Bad Request
+404 Not Found
+422 Unprocessable Entity
+500 Internal Server Error
+
 ```bash
 curl -X PATCH http://localhost:4000/api/yarns/<id> \
 	-H "Content-Type: application/json" \
@@ -133,6 +149,15 @@ curl -X PATCH http://localhost:4000/api/yarns/<id> \
 ```
 
 ### Delete a yarn
+
+DELETE /api/yarns/:id
+
+Status codes:
+204 No Content
+400 Bad Request
+404 Not Found
+500 Internal Server Error
+
 ```bash
 curl -X DELETE http://localhost:4000/api/yarns/<id>
 ```
