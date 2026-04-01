@@ -47,6 +47,10 @@ const yarnSchema = new mongoose.Schema(
     },
     notes: {
       type: String
+    },
+    imageURL: {
+      type: String,
+      trim: true
     }
   },
   {
