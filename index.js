@@ -3,12 +3,14 @@ const mongoose = require('mongoose'); // Import Mongoose for MongoDB interaction
 const Yarn = require('./models/yarn'); // Import the Yarn model
 
 const express = require('express'); // Import Express framework
+const cors = require('cors'); // Import CORS middleware
 
 console.log("INDEX FILE LOADED");
 
 const app = express(); // Create an Express application
 const PORT = process.env.PORT || 4000; // Use port in environment or default to 4000
 
+app.use(cors()); // Enable CORS for all routes
 app.use(express.json()); // Middleware to parse JSON request bodies
 
 

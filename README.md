@@ -14,6 +14,7 @@ This project was built as part of a Backend, Performance and API course assignme
 - MongoDB  
 - Mongoose  
 - dotenv  
+- cors
 
 ---
 
@@ -37,6 +38,20 @@ MONGODB_URI=mongodb://localhost:27017/yarnstash
 ```
 
 Make sure MongoDB is running locally or update the URI for your setup.
+
+---
+
+## CORS
+
+CORS is enabled to allow requests from a frontend application running on a different origin (e.g. a React app on http://localhost:3000).
+
+Without CORS, the browser will block requests to the API.
+
+In this project, CORS is enabled in the Express app:
+
+```js
+app.use(cors());
+```
 
 ---
 
@@ -84,7 +99,7 @@ Returns a list of all yarn entries.
 
 Example request:
 
-```bash 
+```bash
 curl http://localhost:4000/api/yarns
 ```
 
